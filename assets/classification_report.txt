@@ -1,0 +1,19 @@
+=================================================================
+      BREAST CANCER CLASSIFICATION REPORT (VGG-16)
+=================================================================
+
+               precision    recall  f1-score   support
+
+   Benign (0)     1.0000    1.0000    1.0000        10
+Malignant (1)     1.0000    1.0000    1.0000        10
+
+     accuracy                         1.0000        20
+    macro avg     1.0000    1.0000    1.0000        20
+ weighted avg     1.0000    1.0000    1.0000        20
+
+=================================================================
+Diagnostic Sensitivity (Recall): 1.0000
+Diagnostic Specificity:         1.0000
+Positive Predictive Value (PPV): 1.0000
+Negative Predictive Value (NPV): 1.0000
+=================================================================

@@ -1,0 +1,19 @@
+# Python virtual environment
+.venv/
+env/
+venv/
+
+# Bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Checkpoint model files (large binary assets)
+*.keras
+*.h5
+
