@@ -31,7 +31,7 @@ def load_test_image(filepath: str, target_size: Tuple[int, int] = (224, 224)) ->
 
 def test_full_application_pipeline() -> None:
     """Executes the complete 5-stage verification suite."""
-    model_path = "models/vgg16_breast_cancer.keras"
+    model_path = os.path.join("models", "vgg16_breast_cancer.keras")
     assert os.path.exists(model_path), f"Model checkpoint not found at: {model_path}"
 
     print(f"\n[Test 1/5] Loading trained model from: {model_path}...")
@@ -50,7 +50,7 @@ def test_full_application_pipeline() -> None:
     print("  ✓ Custom head architecture verified: GAP -> Dense(128) -> Dropout(0.5) -> Dense(1).")
 
     # [Test 2/5] Benign Inference
-    benign_sample = "sample_scans/benign_scan_01_fibroadenoma.png"
+    benign_sample = os.path.join("sample_scans", "benign_scan_01_fibroadenoma.png")
     _, b_batch = load_test_image(benign_sample)
     b_score = float(model.predict(b_batch, verbose=0)[0][0])
     b_conf = (1.0 - b_score) * 100.0
@@ -59,7 +59,7 @@ def test_full_application_pipeline() -> None:
     assert 0.0 <= b_score <= 1.0, f"Sigmoid output outside [0, 1]: {b_score}"
 
     # [Test 3/5] Malignant Inference
-    mal_sample = "sample_scans/malignant_scan_01_invasive_ductal.png"
+    mal_sample = os.path.join("sample_scans", "malignant_scan_01_invasive_ductal.png")
     m_rgb, m_batch = load_test_image(mal_sample)
     m_score = float(model.predict(m_batch, verbose=0)[0][0])
     m_conf = m_score * 100.0

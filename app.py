@@ -27,17 +27,17 @@ from model_builder import save_initial_model
 # ---------------------------------------------------------------------------
 # Configuration Constants
 # ---------------------------------------------------------------------------
-MODEL_PATH: str = "models/vgg16_breast_cancer.keras"
+MODEL_PATH: str = os.path.join("models", "vgg16_breast_cancer.keras")
 TARGET_LAYER: str = "block5_conv3"
 ASSETS_DIR: str = "assets"
 INPUT_RESOLUTION: Tuple[int, int] = (224, 224)
 
 SAMPLE_SCANS_MAP: Dict[str, str] = {
-    "Benign: Fibroadenoma": "sample_scans/benign_scan_01_fibroadenoma.png",
-    "Benign: Simple Cyst": "sample_scans/benign_scan_02_cyst.png",
-    "Benign: Normal Glandular Tissue": "sample_scans/benign_scan_03_normal_parenchyma.png",
-    "Malignant: Invasive Ductal Carcinoma": "sample_scans/malignant_scan_01_invasive_ductal.png",
-    "Malignant: Lobulated Tumor": "sample_scans/malignant_scan_02_lobulated.png",
+    "Benign: Fibroadenoma": os.path.join("sample_scans", "benign_scan_01_fibroadenoma.png"),
+    "Benign: Simple Cyst": os.path.join("sample_scans", "benign_scan_02_cyst.png"),
+    "Benign: Normal Glandular Tissue": os.path.join("sample_scans", "benign_scan_03_normal_parenchyma.png"),
+    "Malignant: Invasive Ductal Carcinoma": os.path.join("sample_scans", "malignant_scan_01_invasive_ductal.png"),
+    "Malignant: Lobulated Tumor": os.path.join("sample_scans", "malignant_scan_02_lobulated.png"),
 }
 
 COLORMAP_OPTIONS: Dict[str, int] = {
@@ -397,7 +397,7 @@ def render_metrics_and_architecture_expander(model: tf.keras.Model) -> None:
 
             if os.path.exists(report_file):
                 st.markdown("#### Classification Report")
-                with open(report_file, "r") as f:
+                with open(report_file, "r", encoding="utf-8") as f:
                     st.code(f.read(), language="text")
 
         with tab_disclaimer:

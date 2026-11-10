@@ -272,7 +272,7 @@ def evaluate_and_save_metrics(
         zero_division=0
     )
 
-    with open(report_path, "w") as f:
+    with open(report_path, "w", encoding="utf-8") as f:
         f.write("=" * 65 + "\n")
         f.write("      BREAST CANCER CLASSIFICATION REPORT (VGG-16)\n")
         f.write("=" * 65 + "\n\n")
