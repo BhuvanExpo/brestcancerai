@@ -27,9 +27,9 @@ def get_gradcam_submodel(
     Constructs (or retrieves cached) submodel that outputs both the target
     feature maps and the final class predictions for gradient backpropagation.
 
-    Performance Optimization:
-      Caches the submodel on the parent model instance to avoid expensive
-      re-instantiation of functional computational graphs on repeated inferences.
+    Cross-Platform Compatibility:
+      Handles single and multi-input tensor representations cleanly across
+      both Keras 2 and Keras 3 (TensorFlow 2.16 - 2.20+).
 
     Args:
         model: Trained Keras classification model.
@@ -44,9 +44,27 @@ def get_gradcam_submodel(
         return cached
 
     target_layer = model.get_layer(last_conv_layer_name)
+
+    # Standardize input representation
+    if hasattr(model, "inputs") and isinstance(model.inputs, (list, tuple)) and len(model.inputs) > 0:
+        model_input = model.inputs[0]
+    elif hasattr(model, "input"):
+        model_input = model.input
+    else:
+        model_input = model.inputs
+
+    # Standardize output representation
+    target_out = target_layer.output
+    if isinstance(target_out, (list, tuple)) and len(target_out) == 1:
+        target_out = target_out[0]
+
+    model_out = model.output
+    if isinstance(model_out, (list, tuple)) and len(model_out) == 1:
+        model_out = model_out[0]
+
     submodel = tf.keras.models.Model(
-        inputs=model.inputs,
-        outputs=[target_layer.output, model.output]
+        inputs=model_input,
+        outputs=[target_out, model_out]
     )
     setattr(model, cache_attr, submodel)
     return submodel
@@ -77,11 +95,26 @@ def compute_gradcam_heatmap(
     img_tensor = tf.cast(img_array, tf.float32)
 
     with tf.GradientTape() as tape:
-        conv_outputs, predictions = grad_model(img_tensor)
+        outputs = grad_model(img_tensor)
 
-        # Handle binary classification with sigmoid output (shape: [1, 1])
-        if predictions.shape[-1] == 1:
-            score = predictions[0][0]
+        # Robust multi-output unpacking (handles nested list/tuple variations in Keras 3)
+        if isinstance(outputs, (list, tuple)) and len(outputs) >= 2:
+            conv_outputs, predictions = outputs[0], outputs[1]
+        else:
+            raise ValueError(f"Expected at least 2 outputs from Grad-CAM submodel, got {type(outputs)}")
+
+        while isinstance(conv_outputs, (list, tuple)):
+            conv_outputs = conv_outputs[0]
+
+        while isinstance(predictions, (list, tuple)):
+            predictions = predictions[0]
+
+        conv_outputs = tf.convert_to_tensor(conv_outputs)
+        predictions = tf.convert_to_tensor(predictions)
+
+        # Handle binary classification with sigmoid output (shape: [1, 1] or [1])
+        if int(predictions.shape[-1]) == 1:
+            score = predictions[0][0] if predictions.ndim > 1 else predictions[0]
             if pred_index == 0:
                 target_score = 1.0 - score  # Target Benign
             else:
