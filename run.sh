@@ -55,3 +55,4 @@ echo "🚀 Starting Streamlit Web App on http://localhost:8501"
 echo "Press Ctrl+C to stop the server anytime."
 echo "======================================================================"
 exec .venv/bin/streamlit run app.py --server.port 8501
+
