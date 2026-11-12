@@ -39,16 +39,12 @@ run.bat
 ```
 ## 🎯 Quick Navigation by IDE & Operating System
 
-### 📄 Re-generate the PDF Technical Report
-```bash
-.venv/bin/python generate_pdf_report.py
-```
 | Platform & Environment | Recommended Guide | Action |
 | :--- | :--- | :--- |
 | **🍎 Mac + VS Code / Antigravity IDE** | [Section 1: Mac IDE Guide](#1-macos--vs-code--antigravity-ide-guide) | Integrated Terminal / F5 |
 | **🪟 Windows + VS Code / Antigravity IDE** | [Section 2: Windows IDE Guide](#2-windows--vs-code--antigravity-ide-guide) | PowerShell / CMD / F5 |
 | **🌐 Non-Technical / Evaluator** | [Section 3: 0-Install Cloud Web App](#3-zero-install-instant-web-app) | Browser Link (0 setup) |
-| **🧪 ML Operations & PDF Report** | [Section 4: Data Science & Verification](#4-ml-operations-tests-training--pdf-report) | 1-Line Test Commands |
+| **🧪 ML Operations & Verification** | [Section 4: Data Science & Verification](#4-ml-operations-tests--training) | 1-Line Test Commands |
 | **☁️ Google Colab (Cloud GPU)** | [Section 5: Google Colab GPU](#5-google-colab-cloud-gpu-one-block-runner) | Free Tesla T4 GPU |
 | **🐳 Docker Container** | [Section 6: Production Docker](#6-docker-containerized-deployment) | 1-Line Container Run |
 | **🛠️ IDE Troubleshooting & FAQ** | [Section 7: Troubleshooting](#7-universal-ide-troubleshooting--faq) | Fix Common Errors |
@@ -66,7 +62,7 @@ run.bat
 | **1. Non-Technical / Evaluator** | [Instant Cloud Web Access (Zero-Install)](#1-instant-cloud-web-access-zero-install) | 0 seconds |
 | **2. One-Click Local User** | [Automated 1-Click Launchers (`run.sh` / `run.bat`)](#2-one-click-local-launchers-macos-linux--windows) | 5 seconds |
 | **3. Developer / CLI User** | [Copy-Ready Step-by-Step Terminal Setup](#3-developer--cli-step-by-step-setup) | 30 seconds |
-| **4. ML Engineer / Researcher** | [Training, Verification & PDF Report Generation](#4-data-science--ml-operations) | 1 minute |
+| **4. ML Engineer / Researcher** | [Training & Pipeline Verification](#4-data-science--ml-operations) | 1 minute |
 | **5. Google Colab User** | [Cloud GPU / Single Notebook Cell](#5-google-colab--cloud-gpu-notebooks) | 1 minute |
 | **6. Docker / Container User** | [Production Docker Commands](#6-docker-containerized-deployment) | 1 minute |
 Follow these steps if you are running **VS Code**, **Antigravity IDE**, or **Cursor** on **macOS (Apple Silicon M1/M2/M3/M4 or Intel)**:
@@ -318,29 +314,6 @@ Executes transfer learning and updates evaluation curves & confusion matrix:
 
 ---
 
-### D. Compile Formal PDF Report
-Generates the medical-grade publication report with embedded figures and tables:
-```bash
-.venv/bin/python generate_pdf_report.py
-```
-*(On Windows: `.venv\Scripts\python.exe generate_pdf_report.py`)*
-### D. Compile the PDF Technical & Architectural Report
-Generates the publication-grade medical report:
-- **macOS / Linux**:
-  ```bash
-  .venv/bin/python generate_pdf_report.py
-  ```
-- **Windows**:
-  ```powershell
-  .\.venv\Scripts\python.exe generate_pdf_report.py
-  ```
-*(Generated report: `Breast_Cancer_AI_Diagnostic_Platform_Technical_Report.pdf`)*.
-
-Outputs: `Breast_Cancer_AI_Diagnostic_Platform_Technical_Report.pdf` (465 KB).
-
----
-
-## 5. Google Colab / Cloud GPU Notebooks
 ## 5. Google Colab (Cloud GPU One-Block Runner)
 
 Copy and paste this single block into a blank Google Colab code cell:
@@ -486,4 +459,3 @@ If an earlier session of Streamlit is still running:
 ## 📁 Repository Quick Links
 - **GitHub Repository**: [https://github.com/BhuvanExpo/brestcancerai](https://github.com/BhuvanExpo/brestcancerai)
 - **Live Streamlit App**: [https://brestcancerai.streamlit.app](https://brestcancerai.streamlit.app/)
-- **Technical PDF Report**: [Breast_Cancer_AI_Diagnostic_Platform_Technical_Report.pdf](https://github.com/BhuvanExpo/brestcancerai/blob/main/Breast_Cancer_AI_Diagnostic_Platform_Technical_Report.pdf)
